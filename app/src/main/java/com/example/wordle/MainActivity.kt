@@ -1,24 +1,46 @@
 package com.example.wordle
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.example.wordle.databinding.ActivityMainBinding
+import com.example.wordle.ui.MainViewModel
+import com.example.wordle.ui.UiState
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
+    private val mainViewModel by viewModels<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        getWords()
+        initUi()
     }
 
-    private fun getWords() {
+    private fun initUi() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.viewModel = mainViewModel
+        binding.lifecycleOwner = this
+        setContentView(binding.root)
 
-        val inputStream = assets.open("wordle_words.txt")
+        uiState()
+    }
 
-        val string = inputStream.readBytes().toString(Charsets.UTF_8).split("\n")
-
-        Log.d("결과", string.size.toString())
-
+    private fun uiState() {
+        mainViewModel.uiStateLiveDate.observe(this) { uiState ->
+            when (uiState) {
+                is UiState.AddGray -> {}
+                is UiState.AddGreen -> {}
+                is UiState.AddList -> {}
+                is UiState.AddYellow -> {}
+                is UiState.Toast -> {
+                    Toast.makeText(this@MainActivity, uiState.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
     }
 }
