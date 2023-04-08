@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         setContentView(binding.root)
 
+        title = "PA1"
+
         val decoration = DividerItemDecoration(this, VERTICAL)
 
 
@@ -69,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun hideKeyboard(){
+    private fun hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
     }
