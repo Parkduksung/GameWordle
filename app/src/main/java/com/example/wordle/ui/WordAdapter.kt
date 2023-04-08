@@ -39,17 +39,12 @@ class WordViewHolder(private val binding: ItemWordBinding) : RecyclerView.ViewHo
     fun bind(item: String, type: WordType) {
         with(binding.text) {
             text = item.uppercase()
+            val (backgroundColorResId, textColorResId) = Color.getColorResourceIds(type)
             setTextColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    Color.getBackgroundAndWordColor(type).second
-                )
+                ContextCompat.getColor(itemView.context, textColorResId)
             )
             setBackgroundColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    Color.getBackgroundAndWordColor(type).first
-                )
+                ContextCompat.getColor(itemView.context, backgroundColorResId)
             )
         }
     }

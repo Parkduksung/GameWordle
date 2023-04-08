@@ -40,83 +40,57 @@ class WordListViewHolder(private val binding: ItemWordlistBinding) :
 
             with(text1) {
                 text = word[0].first.uppercase()
+                val (backgroundColorResId, textColorResId) = Color.getColorResourceIds(word[0].second)
                 setTextColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        Color.getBackgroundAndWordColor(word[0].second).second
-                    )
+                    ContextCompat.getColor(itemView.context, textColorResId)
                 )
                 setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        Color.getBackgroundAndWordColor(word[0].second).first
-                    )
+                    ContextCompat.getColor(itemView.context, backgroundColorResId)
                 )
             }
 
             with(text2) {
                 text = word[1].first.uppercase()
+                val (backgroundColorResId, textColorResId) = Color.getColorResourceIds(word[1].second)
                 setTextColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        Color.getBackgroundAndWordColor(word[1].second).second
-                    )
+                    ContextCompat.getColor(itemView.context, textColorResId)
                 )
                 setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        Color.getBackgroundAndWordColor(word[1].second).first
-                    )
+                    ContextCompat.getColor(itemView.context, backgroundColorResId)
                 )
             }
 
             with(text3) {
                 text = word[2].first.uppercase()
+                val (backgroundColorResId, textColorResId) = Color.getColorResourceIds(word[2].second)
                 setTextColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        Color.getBackgroundAndWordColor(word[2].second).second
-                    )
+                    ContextCompat.getColor(itemView.context, textColorResId)
                 )
                 setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        Color.getBackgroundAndWordColor(word[2].second).first
-                    )
+                    ContextCompat.getColor(itemView.context, backgroundColorResId)
                 )
             }
             with(text4) {
                 text = word[3].first.uppercase()
+                val (backgroundColorResId, textColorResId) = Color.getColorResourceIds(word[3].second)
                 setTextColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        Color.getBackgroundAndWordColor(word[3].second).second
-                    )
+                    ContextCompat.getColor(itemView.context, textColorResId)
                 )
                 setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        Color.getBackgroundAndWordColor(word[3].second).first
-                    )
+                    ContextCompat.getColor(itemView.context, backgroundColorResId)
                 )
             }
 
             with(text5) {
                 text = word[4].first.uppercase()
+                val (backgroundColorResId, textColorResId) = Color.getColorResourceIds(word[4].second)
                 setTextColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        Color.getBackgroundAndWordColor(word[4].second).second
-                    )
+                    ContextCompat.getColor(itemView.context, textColorResId)
                 )
                 setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        Color.getBackgroundAndWordColor(word[4].second).first
-                    )
+                    ContextCompat.getColor(itemView.context, backgroundColorResId)
                 )
             }
-
 
         }
 
