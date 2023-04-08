@@ -24,7 +24,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val inputWordleLiveData = MutableLiveData("")
 
     fun submit() {
-
         if (!isFinished) {
 
 
@@ -44,7 +43,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             inputWordleLiveData.value!!.forEachIndexed { inputwordleIndex, inputwordle ->
 
                 if (getRandomWordle.toList().contains(inputwordle)) {
-                    if (getRandomWordle.toList().indexOf(inputwordle) == inputwordleIndex) {
+                    if (getRandomWordle.toList()[inputwordleIndex] == inputwordle) {
                         convertList.add(Pair(inputwordle.toString(), WordType.Green))
                     } else {
                         convertList.add(Pair(inputwordle.toString(), WordType.Yellow))
