@@ -14,7 +14,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val getWordList = wordRepository.getWordList()
 
-    private val getRandomWordle = wordRepository.getRandomWordle()
+    private val getRandomWordle = "lousy"
+
 
     private val _uiStateLiveData = MutableLiveData<UiState>()
     val uiStateLiveDate: LiveData<UiState> = _uiStateLiveData
@@ -23,7 +24,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val inputWordleLiveData = MutableLiveData("")
 
+    private val grayList = mutableListOf<String>()
+    private val yellowList = mutableListOf<String>()
+    private val greenList = mutableListOf<String>()
+
+
     fun submit() {
+
         if (!isFinished) {
 
 
@@ -33,12 +40,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
             if (!getWordList.contains(inputWordleLiveData.value)) {
                 onChangedUiState(UiState.Toast("Word ‘${inputWordleLiveData.value}’ not in dictionary!"))
+                inputWordleLiveData.value = ""
                 return
             }
 
-
             val convertList = mutableListOf<Pair<String, WordType>>()
-
 
             inputWordleLiveData.value!!.forEachIndexed { inputwordleIndex, inputwordle ->
 
@@ -54,19 +60,37 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
 
 
-            val grayList = convertList.filter { it.second == WordType.Gray }.map { it.first }
-            val yellowList = convertList.filter { it.second == WordType.Yellow }.map { it.first }
-            val greenList = convertList.filter { it.second == WordType.Green }.map { it.first }
+            val getGrayList = convertList.filter { it.second == WordType.Gray }.map { it.first }
+            val getYellowList = convertList.filter { it.second == WordType.Yellow }.map { it.first }
+            val getGreenList = convertList.filter { it.second == WordType.Green }.map { it.first }
 
 
-            onChangedUiState(UiState.Result(convertList, grayList, yellowList, greenList))
+            grayList.addAll(getGrayList)
+            yellowList.addAll(getYellowList)
+            greenList.addAll(getGreenList)
+
+
+            val filterList = yellowList.filter { it !in greenList }
+
+            yellowList.clear()
+            yellowList.addAll(filterList)
+
+
+            onChangedUiState(
+                UiState.Result(
+                    convertList,
+                    grayList.distinct(),
+                    yellowList.distinct(),
+                    greenList.distinct()
+                )
+            )
 
             inputWordleLiveData.value = ""
-
 
             if (greenList.size == 5) {
                 isFinished = !isFinished
             }
+
         }
     }
 
@@ -76,6 +100,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _uiStateLiveData.value = null
         }
     }
+
 }
 
 sealed interface UiState {
@@ -94,4 +119,3 @@ sealed interface UiState {
 enum class WordType {
     Gray, Yellow, Green
 }
-

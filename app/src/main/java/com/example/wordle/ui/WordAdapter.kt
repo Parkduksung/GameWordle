@@ -10,7 +10,9 @@ import com.example.wordle.utils.Color
 
 
 class WordAdapter(private val type: WordType) : RecyclerView.Adapter<WordViewHolder>() {
+
     private val wordList = mutableListOf<String>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
         val binding = ItemWordBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return WordViewHolder(binding)
@@ -25,10 +27,8 @@ class WordAdapter(private val type: WordType) : RecyclerView.Adapter<WordViewHol
 
     @SuppressLint("NotifyDataSetChanged")
     fun add(word: List<String>) {
-        wordList.addAll(word)
-        val convertList = wordList.distinct().sorted()
         wordList.clear()
-        wordList.addAll(convertList)
+        wordList.addAll(word)
         notifyDataSetChanged()
     }
 }
